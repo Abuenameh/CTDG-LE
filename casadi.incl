@@ -1,0 +1,160 @@
+for( int i = 0; i < L; i++)
+{
+int k1 = mod(i-2);
+int j1 = mod(i-1);
+int j2 = mod(i+1);
+int k2 = mod(i+2);
+Ei = complex<SX>(0,0);
+Ej1 = complex<SX>(0,0);
+Ej2 = complex<SX>(0,0);
+Ej1j2 = complex<SX>(0,0);
+Ej1k1 = complex<SX>(0,0);
+Ej2k2 = complex<SX>(0,0);
+for( int n = 0; n < nmax+1; n++)
+{
+Ei += -0.5 * complex<SX>(dU[i],0) * n * conj(f[i][n]) * f[i][n] + -1. * complex<SX>(mu,0) * n * conj(f[i][n]) * f[i][n] + -0.5 * complex<SX>(U0,0) * n * conj(f[i][n]) * f[i][n] + 0.5 * complex<SX>(dU[i],0) * (n * n) * conj(f[i][n]) * f[i][n] + 0.5 * complex<SX>(U0,0) * (n * n) * conj(f[i][n]) * f[i][n];
+if( 1 + n <= nmax)
+{
+Ej1 += -1. * conj(f[i][1 + n]) * conj(f[j1][n]) * f[i][n] * f[j1][1 + n] * g(n, 1 + n) * J[j1];
+}
+if( 1 + n <= nmax)
+{
+Ej2 += -1. * conj(f[i][1 + n]) * conj(f[j2][n]) * f[i][n] * f[j2][1 + n] * g(n, 1 + n) * J[i];
+}
+for( int m = 1; m < nmax+1; m++)
+{
+if( n < 7)
+{
+if( n != -1 + m)
+{
+for( int p = 0; p < nmax; p++)
+{
+for( int q = 1; q < nmax+1; q++)
+{
+if( p != -1 + q)
+{
+if( -1. * m + n == p + -1. * q)
+{
+if( q >= 1 && 1 + p <= nmax)
+{
+if( m + -1. * p == 0 && n + -1. * q == 0)
+{
+Ej1 += 0.5 * conj(f[i][1 + n]) * conj(f[j1][-1 + m]) * f[i][-1 + q] * f[j1][1 + p] * g(n, m) * g(-1 + q, 1 + p) * (J[j1] * J[j1]) * (1 / (eps(U0, n, m)));
+}
+if( 2 + -1. * m + p == 0 && 2 + n + -1. * q == 0)
+{
+Ej1 += -0.5 * conj(f[i][q]) * conj(f[j1][p]) * f[i][n] * f[j1][m] * g(n, m) * g(-1 + q, 1 + p) * (J[j1] * J[j1]) * (1 / (eps(U0, n, m)));
+}
+}
+if( q >= 1 && 1 + p <= nmax)
+{
+if( m + -1. * p == 0 && n + -1. * q == 0)
+{
+Ej2 += 0.5 * conj(f[i][1 + n]) * conj(f[j2][-1 + m]) * f[i][-1 + q] * f[j2][1 + p] * g(n, m) * g(-1 + q, 1 + p) * (J[i] * J[i]) * (1 / (eps(U0, n, m)));
+}
+if( 2 + -1. * m + p == 0 && 2 + n + -1. * q == 0)
+{
+Ej2 += -0.5 * conj(f[i][q]) * conj(f[j2][p]) * f[i][n] * f[j2][m] * g(n, m) * g(-1 + q, 1 + p) * (J[i] * J[i]) * (1 / (eps(U0, n, m)));
+}
+}
+if( 1 + p <= nmax && q >= 1)
+{
+if( n + -1. * p == 0 && m + -1. * q == 0)
+{
+Ej1 += -0.5 * conj(f[i][p]) * conj(f[j1][q]) * f[i][n] * f[j1][m] * g(n, m) * g(-1 + q, 1 + p) * (J[j1] * J[j1]) * (1 / (eps(U0, n, m))) + 0.5 * conj(f[i][1 + n]) * conj(f[j1][-1 + m]) * f[i][1 + p] * f[j1][-1 + q] * g(n, m) * g(-1 + q, 1 + p) * (J[j1] * J[j1]) * (1 / (eps(U0, n, m)));
+}
+}
+if( 1 + p <= nmax && q >= 1)
+{
+if( n + -1. * p == 0 && m + -1. * q == 0)
+{
+Ej2 += -0.5 * conj(f[i][p]) * conj(f[j2][q]) * f[i][n] * f[j2][m] * g(n, m) * g(-1 + q, 1 + p) * (J[i] * J[i]) * (1 / (eps(U0, n, m))) + 0.5 * conj(f[i][1 + n]) * conj(f[j2][-1 + m]) * f[i][1 + p] * f[j2][-1 + q] * g(n, m) * g(-1 + q, 1 + p) * (J[i] * J[i]) * (1 / (eps(U0, n, m)));
+}
+}
+if( q >= 1 && 1 + p <= nmax)
+{
+if( n + -1. * q == 0)
+{
+Ej1j2 += 0.5 * conj(f[i][1 + n]) * conj(f[j1][p]) * conj(f[j2][-1 + m]) * f[i][-1 + q] * f[j1][1 + p] * f[j2][m] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j1] * (1 / (eps(U0, n, m)));
+}
+if( 2 + n + -1. * q == 0)
+{
+Ej1j2 += -0.5 * conj(f[i][q]) * conj(f[j1][p]) * conj(f[j2][-1 + m]) * f[i][n] * f[j1][1 + p] * f[j2][m] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j1] * (1 / (eps(U0, n, m)));
+}
+}
+if( q >= 1 && 1 + p <= nmax)
+{
+if( n + -1. * q == 0)
+{
+Ej1j2 += 0.5 * conj(f[i][1 + n]) * conj(f[j1][-1 + m]) * conj(f[j2][p]) * f[i][-1 + q] * f[j1][m] * f[j2][1 + p] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j1] * (1 / (eps(U0, n, m)));
+}
+if( 2 + n + -1. * q == 0)
+{
+Ej1j2 += -0.5 * conj(f[i][q]) * conj(f[j1][-1 + m]) * conj(f[j2][p]) * f[i][n] * f[j1][m] * f[j2][1 + p] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j1] * (1 / (eps(U0, n, m)));
+}
+}
+if( q >= 1 && 1 + p <= nmax)
+{
+if( m + -1. * q == 0)
+{
+Ej1k1 += -0.5 * conj(f[i][1 + n]) * conj(f[j1][q]) * conj(f[k1][p]) * f[i][n] * f[j1][m] * f[k1][1 + p] * g(n, m) * g(-1 + q, 1 + p) * J[j1] * J[k1] * (1 / (eps(U0, n, m))) + 0.5 * conj(f[i][1 + n]) * conj(f[j1][-1 + m]) * conj(f[k1][p]) * f[i][n] * f[j1][-1 + q] * f[k1][1 + p] * g(n, m) * g(-1 + q, 1 + p) * J[j1] * J[k1] * (1 / (eps(U0, n, m)));
+}
+}
+if( q >= 1 && 1 + p <= nmax)
+{
+if( m + -1. * q == 0)
+{
+Ej2k2 += -0.5 * conj(f[i][1 + n]) * conj(f[j2][q]) * conj(f[k2][p]) * f[i][n] * f[j2][m] * f[k2][1 + p] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j2] * (1 / (eps(U0, n, m))) + 0.5 * conj(f[i][1 + n]) * conj(f[j2][-1 + m]) * conj(f[k2][p]) * f[i][n] * f[j2][-1 + q] * f[k2][1 + p] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j2] * (1 / (eps(U0, n, m)));
+}
+}
+if( q >= 1 && 1 + p <= nmax)
+{
+if( n + -1. * p == 0)
+{
+Ej1j2 += -0.5 * conj(f[i][p]) * conj(f[j1][-1 + m]) * conj(f[j2][q]) * f[i][n] * f[j1][m] * f[j2][-1 + q] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j1] * (1 / (eps(U0, n, m))) + 0.5 * conj(f[i][1 + n]) * conj(f[j1][-1 + m]) * conj(f[j2][q]) * f[i][1 + p] * f[j1][m] * f[j2][-1 + q] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j1] * (1 / (eps(U0, n, m)));
+}
+}
+if( q >= 1 && 1 + p <= nmax)
+{
+if( n + -1. * p == 0)
+{
+Ej1j2 += -0.5 * conj(f[i][p]) * conj(f[j1][q]) * conj(f[j2][-1 + m]) * f[i][n] * f[j1][-1 + q] * f[j2][m] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j1] * (1 / (eps(U0, n, m))) + 0.5 * conj(f[i][1 + n]) * conj(f[j1][q]) * conj(f[j2][-1 + m]) * f[i][1 + p] * f[j1][-1 + q] * f[j2][m] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j1] * (1 / (eps(U0, n, m)));
+}
+}
+if( q >= 1 && 1 + p <= nmax)
+{
+if( m + -1. * p == 0)
+{
+Ej1k1 += 0.5 * conj(f[i][1 + n]) * conj(f[j1][-1 + m]) * conj(f[k1][q]) * f[i][n] * f[j1][1 + p] * f[k1][-1 + q] * g(n, m) * g(-1 + q, 1 + p) * J[j1] * J[k1] * (1 / (eps(U0, n, m)));
+}
+if( 2 + -1. * m + p == 0)
+{
+Ej1k1 += -0.5 * conj(f[i][1 + n]) * conj(f[j1][p]) * conj(f[k1][q]) * f[i][n] * f[j1][m] * f[k1][-1 + q] * g(n, m) * g(-1 + q, 1 + p) * J[j1] * J[k1] * (1 / (eps(U0, n, m)));
+}
+}
+if( q >= 1 && 1 + p <= nmax)
+{
+if( m + -1. * p == 0)
+{
+Ej2k2 += 0.5 * conj(f[i][1 + n]) * conj(f[j2][-1 + m]) * conj(f[k2][q]) * f[i][n] * f[j2][1 + p] * f[k2][-1 + q] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j2] * (1 / (eps(U0, n, m)));
+}
+if( 2 + -1. * m + p == 0)
+{
+Ej2k2 += -0.5 * conj(f[i][1 + n]) * conj(f[j2][p]) * conj(f[k2][q]) * f[i][n] * f[j2][m] * f[k2][-1 + q] * g(n, m) * g(-1 + q, 1 + p) * J[i] * J[j2] * (1 / (eps(U0, n, m)));
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+E += Ei;
+E += Ej1;
+E += Ej2;
+E += Ej1j2;
+E += Ej1k1;
+E += Ej2k2;
+}

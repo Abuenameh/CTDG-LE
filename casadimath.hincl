@@ -1,0 +1,14 @@
+complex<SX> energy1(int i, int n, SX& fin, SX& J, SX& U0, SX& dU, SX& mu);
+
+complex<SX> energy2(int i, int n, SX& fin, SX& J, SX& U0, SX& dU, SX& mu);
+
+complex<SX> energy3(int i, int n, SX& fin, SX& J, SX& U0, SX& dU, SX& mu);
+
+complex<SX> energy4(int i, int n, SX& fin, SX& J, SX& U0, SX& dU, SX& mu);
+
+complex<SX> energy5(int i, int n, SX& fin, SX& J, SX& U0, SX& dU, SX& mu);
+
+complex<SX> energy6(int i, int n, SX& fin, SX& J, SX& U0, SX& dU, SX& mu);
+
+complex<SX> energy7(int i, int n, SX& fin, SX& J, SX& U0, SX& dU, SX& mu);
+

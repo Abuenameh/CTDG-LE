@@ -1,0 +1,18 @@
+double ode1(int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+double ode2(int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+double ode3(int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+double ode4(int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+double ode5(int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+double ode6(int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+double ode7(int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+double odeS(int in, vector<double>& fin, vector<double>& J, vector<double>& Jp, double U0, double U0p, vector<double>& dU, double mu);
+
+double ode(int in, vector<double>& fin, vector<double>& J, vector<double>& Jp, double U0, double U0p, vector<double>& dU, double mu);
+

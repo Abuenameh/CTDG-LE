@@ -1,0 +1,18 @@
+void jac1(vector<double>& jac, int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+void jac2(vector<double>& jac, int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+void jac3(vector<double>& jac, int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+void jac4(vector<double>& jac, int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+void jac5(vector<double>& jac, int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+void jac6(vector<double>& jac, int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+void jac7(vector<double>& jac, int in, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu);
+
+void jacS(vector<double>& jac, int in, vector<double>& fin, vector<double>& J, vector<double>& Jp, double U0, double U0p, vector<double>& dU, double mu);
+
+void jacobian(vector<double>& jac, int in, vector<double>& fin, vector<double>& J, vector<double>& Jp, double U0, double U0p, vector<double>& dU, double mu);
+
