@@ -31,10 +31,34 @@ Ej1 += -1. * conj(f[i][1 + n]) * conj(f[j1][-1 + m]) * f[i][n] * f[j1][m] * g(n,
 Ej2 += -1. * conj(f[i][1 + n]) * conj(f[j2][-1 + m]) * f[i][n] * f[j2][m] * g(n, m) * J[i] * eps(dU, i, j2, n, m) * (1 / (eps(U0, n, m)));
 for( int p = 0; p < nmax; p++)
 {
+Ej1 += 0;
+Ej2 += 0;
+Ej1 += 0;
+Ej2 += 0;
+Ej1j2 += 0;
+Ej1j2 += 0;
+Ej1k1 += 0;
+Ej2k2 += 0;
+Ej1j2 += 0;
+Ej1j2 += 0;
+Ej1k1 += 0;
+Ej2k2 += 0;
 for( int q = 1; q < nmax+1; q++)
 {
 if( p != -1 + q)
 {
+Ej1 += 0;
+Ej2 += 0;
+Ej1 += 0;
+Ej2 += 0;
+Ej1j2 += 0;
+Ej1j2 += 0;
+Ej1k1 += 0;
+Ej2k2 += 0;
+Ej1j2 += 0;
+Ej1j2 += 0;
+Ej1k1 += 0;
+Ej2k2 += 0;
 if( -1. * m + n == p + -1. * q)
 {
 if( q >= 1 && 1 + p <= nmax)
