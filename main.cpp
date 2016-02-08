@@ -555,21 +555,21 @@ worker_input* initialize(double Wi, double Wf, double mu, vector<double>& xi, ma
     lopt.optimize(x0nlopt, E0nlopt);
     cout << "Enlopt = " << E0nlopt << endl;
 
-        opt gopt(GD_MLSL, 2*L*dim);
-        gopt.set_lower_bounds(-1);
-        gopt.set_upper_bounds(1);
-        gopt.set_maxtime(600);
-        gopt.set_min_objective(energymin, &grad);
-        gopt.set_local_optimizer(lopt);
-        gopt.set_population(100);
-        double E0nlopt2;
-        vector<double> x0nlopt2 = xrand;
-        gopt.optimize(x0nlopt2, E0nlopt2);
-        cout << "Enlopt2(1) = " << E0nlopt2 << endl;
-        lopt.optimize(x0nlopt2, E0nlopt2);
-        cout << "Enlopt2(2) = " << E0nlopt2 << endl;
-        
-        exit(0);
+//        opt gopt(GD_MLSL, 2*L*dim);
+//        gopt.set_lower_bounds(-1);
+//        gopt.set_upper_bounds(1);
+//        gopt.set_maxtime(600);
+//        gopt.set_min_objective(energymin, &grad);
+//        gopt.set_local_optimizer(lopt);
+//        gopt.set_population(100);
+//        double E0nlopt2;
+//        vector<double> x0nlopt2 = xrand;
+//        gopt.optimize(x0nlopt2, E0nlopt2);
+//        cout << "Enlopt2(1) = " << E0nlopt2 << endl;
+//        lopt.optimize(x0nlopt2, E0nlopt2);
+//        cout << "Enlopt2(2) = " << E0nlopt2 << endl;
+//        
+//        exit(0);
 
     vector<double> x0;
     if (E0ipopt < E0nlopt) {
@@ -636,13 +636,13 @@ void evolve(SXFunction& E0, SXFunction& Et, Function& ode_func, Function& jac_fu
     double dt = input->dt;
     Integrator integrator_rk("integrator", "rk", ode_func, make_dict("t0", 0, "tf", 2 * tau, "number_of_finite_elements", ceil((2 * tau) / dt)));
     Integrator integrator_cvodes("integrator", "cvodes", ode_func, make_dict("t0", 0, "tf", 2 * tau, "exact_jacobian", false, "max_num_steps", 100000));
-    Integrator integrator_cvodesjac("integrator", "cvodesjac", ode_func, make_dict("t0", 0, "tf", 2 * tau, "exact_jacobian", true, "full_jacobian", jac_func, "max_num_steps", 100000));
+//    Integrator integrator_cvodesjac("integrator", "cvodesjac", ode_func, make_dict("t0", 0, "tf", 2 * tau, "exact_jacobian", true, "full_jacobian", jac_func, "max_num_steps", 100000));
     Integrator integrator_rk1("integrator", "rk", ode_func, make_dict("t0", 0, "tf", tau, "number_of_finite_elements", ceil((tau) / dt)));
     Integrator integrator_cvodes1("integrator", "cvodes", ode_func, make_dict("t0", 0, "tf", tau, "exact_jacobian", false, "max_num_steps", 100000));
-    Integrator integrator_cvodesjac1("integrator", "cvodesjac", ode_func, make_dict("t0", 0, "tf", tau, "exact_jacobian", /*false*/true, "full_jacobian", jac_func, "max_num_steps", 100000));
+//    Integrator integrator_cvodesjac1("integrator", "cvodesjac", ode_func, make_dict("t0", 0, "tf", tau, "exact_jacobian", /*false*/true, "full_jacobian", jac_func, "max_num_steps", 100000));
     Integrator integrator_rk2("integrator", "rk", ode_func, make_dict("t0", tau, "tf", 2 * tau, "number_of_finite_elements", ceil((tau) / dt)));
     Integrator integrator_cvodes2("integrator", "cvodes", ode_func, make_dict("t0", tau, "tf", 2 * tau, "exact_jacobian", false, "max_num_steps", 100000));
-    Integrator integrator_cvodesjac2("integrator", "cvodesjac", ode_func, make_dict("t0", tau, "tf", 2 * tau, "exact_jacobian", /*false*/true, "full_jacobian", jac_func, "max_num_steps", 100000));
+//    Integrator integrator_cvodesjac2("integrator", "cvodesjac", ode_func, make_dict("t0", tau, "tf", 2 * tau, "exact_jacobian", /*false*/true, "full_jacobian", jac_func, "max_num_steps", 100000));
     Integrator integrator;
     Integrator integrator1;
     Integrator integrator2;
@@ -656,11 +656,11 @@ void evolve(SXFunction& E0, SXFunction& Et, Function& ode_func, Function& jac_fu
         integrator1 = integrator_cvodes1;
         integrator2 = integrator_cvodes2;
     }
-    if (input->integrator == "cvodesjac") {
-        integrator = integrator_cvodesjac;
-        integrator1 = integrator_cvodesjac1;
-        integrator2 = integrator_cvodesjac2;
-    }
+//    if (input->integrator == "cvodesjac") {
+//        integrator = integrator_cvodesjac;
+//        integrator1 = integrator_cvodesjac1;
+//        integrator2 = integrator_cvodesjac2;
+//    }
     ptime start_time = microsec_clock::local_time();
 
     std::vector<double> x0;
@@ -890,31 +890,31 @@ void worker(worker_input* input, worker_tau* tau_in, worker_output* output, mana
     });
     SXFunction E0 = SXFunction("E0",{f}, Ef(vector<SX>{f, 0, 1}));
 
-        ExternalFunction ode_func("ode");
-        Function jac_func;
+//        ExternalFunction ode_func("ode");
+//        Function jac_func;
 
-//    Function ode_func, jac_func;
+    Function ode_func, jac_func;
 //
 //    ODEFunction odef;
 //    JacFunction jacf;
-//    chdir("odes");
-//    vector<Function> odes;
-//    odes.push_back(ExternalFunction("ode_S"));
-//    for (int ei = 0; ei < 7; ei++) {
-//        for (int i = 0; i < L; i++) {
-//            for (int n = 0; n <= nmax; n++) {
-//                string funcname = "ode_E_" + to_string(ei) + "_" + to_string(i) + "_" + to_string(n);
-//                odes.push_back(ExternalFunction(funcname));
-//            }
-//        }
-//    }
-//    SumFunction sf(odes);
-//    chdir("..");
+    chdir("odes");
+    vector<Function> odes;
+    odes.push_back(ExternalFunction("ode_S"));
+    for (int ei = 0; ei < 7; ei++) {
+        for (int i = 0; i < L; i++) {
+            for (int n = 0; n <= nmax; n++) {
+                string funcname = "ode_E_" + to_string(ei) + "_" + to_string(i) + "_" + to_string(n);
+                odes.push_back(ExternalFunction(funcname));
+            }
+        }
+    }
+    SumFunction sf(odes);
+    chdir("..");
 //    if (input->integrator == "cvodesjac") {
 //        ode_func = odef.create();
 //        jac_func = jacf.create();
 //    } else {
-//        ode_func = sf.create();
+        ode_func = sf.create();
 //    }
 
     //    SXFunction ode_func = get_ode();
@@ -1146,11 +1146,11 @@ int main(int argc, char** argv) {
     //    gen.generate("ode");
     //    return 0;
 
-    //    build_ode();
-    //    return 0;
+//        build_odes();
+//        return 0;
 
-    //        build_ode();
-    //        return 0;
+//            build_ode();
+//            return 0;
 
     ptime begin = microsec_clock::local_time();
 
@@ -1187,7 +1187,7 @@ int main(int argc, char** argv) {
 
 #ifdef AMAZON
         //    path resdir("/home/ubuntu/Results/Canonical Transformation Dynamical Gutzwiller");
-        path resdir("/home/ubuntu/Dropbox/Amazon EC2/Simulation Results/CTDG");
+        path resdir("/home/ubuntu/Dropbox/Amazon EC2/Simulation Results/CTDG LE");
 #else
         path resdir("/Users/Abuenameh/Documents/Simulation Results/Canonical Transformation Dynamical Gutzwiller 2");
         //        path resdir("/Users/Abuenameh/Documents/Simulation Results/Dynamical Gutzwiller Hartmann Comparison");
