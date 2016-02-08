@@ -172,6 +172,118 @@ complex<SX> energynorm(SX& fin, SX& J, SX& U0, SX& dU, SX& mu) {
     return E; //E.real();
 }
 
+complex<SX> energy0(SX& fin, SX& J, SX& U0, SX& dU, double mu) {
+    vector<vector<complex < SX>>> f(L, vector<complex < SX >> (dim, complex<SX>(0, 0)));
+    vector<SX> norm2(L, 0);
+    for (int j = 0; j < L; j++) {
+        for (int k = 0; k < dim; k++) {
+            int l = 2 * (j * dim + k);
+            f[j][k] = complex<SX>(fin[l], fin[l + 1]);
+        }
+        for (int m = 0; m <= nmax; m++) {
+            norm2[j] += f[j][m].real() * f[j][m].real() + f[j][m].imag() * f[j][m].imag();
+        }
+    }
+
+    double theta = 0;
+    double costh = cos(theta);
+    double sinth = sin(theta);
+    double cos2th = cos(2 * theta);
+    double sin2th = sin(2 * theta);
+
+    complex<SX> E = complex<SX>(0, 0);
+
+    complex<SX> Ei, Ej1, Ej2, Ej1j2, Ej1k1, Ej2k2;
+
+#include "casadi0.incl"
+
+    return E; //E.real();
+}
+
+complex<SX> energy0(SX& fin, SX& J, SX& U0, SX& dU, SX& mu) {
+    vector<vector<complex < SX>>> f(L, vector<complex < SX >> (dim, complex<SX>(0, 0)));
+    vector<SX> norm2(L, 0);
+    for (int j = 0; j < L; j++) {
+        for (int k = 0; k < dim; k++) {
+            int l = 2 * (j * dim + k);
+            f[j][k] = complex<SX>(fin[l], fin[l + 1]);
+        }
+        for (int m = 0; m <= nmax; m++) {
+            norm2[j] += f[j][m].real() * f[j][m].real() + f[j][m].imag() * f[j][m].imag();
+        }
+    }
+
+    double theta = 0;
+    double costh = cos(theta);
+    double sinth = sin(theta);
+    double cos2th = cos(2 * theta);
+    double sin2th = sin(2 * theta);
+
+    complex<SX> E = complex<SX>(0, 0);
+
+    complex<SX> Ei, Ej1, Ej2, Ej1j2, Ej1k1, Ej2k2;
+
+#include "casadi0.incl"
+
+    return E; //E.real();
+}
+
+complex<SX> energynorm0(SX& fin, SX& J, SX& U0, SX& dU, double mu) {
+    vector<vector<complex < SX>>> f(L, vector<complex < SX >> (dim, complex<SX>(0, 0)));
+    vector<SX> norm2(L, 0);
+    for (int j = 0; j < L; j++) {
+        for (int k = 0; k < dim; k++) {
+            int l = 2 * (j * dim + k);
+            f[j][k] = complex<SX>(fin[l], fin[l + 1]);
+        }
+        for (int m = 0; m <= nmax; m++) {
+            norm2[j] += f[j][m].real() * f[j][m].real() + f[j][m].imag() * f[j][m].imag();
+        }
+    }
+
+    double theta = 0;
+    double costh = cos(theta);
+    double sinth = sin(theta);
+    double cos2th = cos(2 * theta);
+    double sin2th = sin(2 * theta);
+
+    complex<SX> E = complex<SX>(0, 0);
+
+    complex<SX> Ei, Ej1, Ej2, Ej1j2, Ej1k1, Ej2k2;
+
+#include "casadinorm0.incl"
+
+    return E; //E.real();
+}
+
+complex<SX> energynorm0(SX& fin, SX& J, SX& U0, SX& dU, SX& mu) {
+    vector<vector<complex < SX>>> f(L, vector<complex < SX >> (dim, complex<SX>(0, 0)));
+    vector<SX> norm2(L, 0);
+    for (int j = 0; j < L; j++) {
+        for (int k = 0; k < dim; k++) {
+            int l = 2 * (j * dim + k);
+            f[j][k] = complex<SX>(fin[l], fin[l + 1]);
+        }
+        for (int m = 0; m <= nmax; m++) {
+            norm2[j] += f[j][m].real() * f[j][m].real() + f[j][m].imag() * f[j][m].imag();
+        }
+    }
+
+    double theta = 0;
+    double costh = cos(theta);
+    double sinth = sin(theta);
+    double cos2th = cos(2 * theta);
+    double sin2th = sin(2 * theta);
+
+    complex<SX> E = complex<SX>(0, 0);
+
+    complex<SX> Ei, Ej1, Ej2, Ej1j2, Ej1k1, Ej2k2;
+
+#include "casadinorm0.incl"
+
+    return E; //E.real();
+}
+
 complex<SX> canonical(int i, int n, SX& fin, SX& J, SX& U0, SX& dU, SX mu) {
 
     vector<vector<complex < SX>>> f(L, vector<complex < SX >> (dim, complex<SX>(0, 0)));
