@@ -505,6 +505,26 @@ worker_input* initialize(double Wi, double Wf, double mu, vector<double>& xi, ma
 
     SX E = energy(f, J, U0, dU, mu).real();
     SX Enorm = energynorm(f, J, U0, dU, mu).real();
+    
+//    boost::random::mt19937 frng;
+//    boost::random::uniform_real_distribution<> funi(-1, 1);
+//    boost::random::mt19937 Jrng;
+//    boost::random::uniform_real_distribution<> Juni(1, 2);
+//    boost::random::mt19937 dUrng;
+//    boost::random::uniform_real_distribution<> dUuni(-0.5, 0.5);
+//    SX EI = energy(f, J, U0, dU, mu).imag();
+//    vector<double> fv(2*L*dim), dUv(L), Jv(L);
+//    for (int i = 0; i < 2*L*dim; i++) {
+//        fv[i] = funi(frng);
+//    }
+//    for (int i = 0; i < L; i++) {
+//        dUv[i] = dUuni(dUrng);
+//        Jv[i] = Juni(Jrng);
+//    }
+//    SXFunction EIf("EI", vector<SX>{f}, vector<SX>{EI});
+//    vector<DMatrix> Eires = EIf(vector<DMatrix>{fv});
+//    cout << Eires << endl;
+//    exit(0);
 
     SX g = SX::sym("g", L);
     for (int i = 0; i < L; i++) {
